@@ -1,0 +1,53 @@
+{
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    // "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    // "standard-with-typescript",
+    "plugin:prettier/recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "prettier"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./**/tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "comma-dangle": 0,
+    "no-console": 0,
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-var-requires": 0,
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "import/extensions": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/destructuring-assignment": "off", //Enforce consistent usage of destructuring assignment of props, state, and context
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "jsx-a11y/click-events-have-key-events": "off", // must use key eventson event click
+    "jsx-a11y/no-static-element-interactions": "off" //div change on button and type button
+    // "jsx-a11y/label-has-associated-control": "off"
+  }
+}
