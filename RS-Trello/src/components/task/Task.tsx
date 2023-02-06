@@ -1,21 +1,29 @@
 import React from 'react';
+import { Draggable } from "react-beautiful-dnd";
+import { ITask } from '../../types/types';
+import taskBox from './Task.module.css';
 
 interface TaskProps {
-  // index: number;
-  // id: string;
-  name: string;
-  description: string | undefined;
+  ind: number;
+  task: ITask
 }
 
 const Task: React.FC<TaskProps> = ({
-  // index,
-  // id,
-  name,
-  description,
+  ind,
+  task
 }) => (
-  <div>
-    <p>{name}</p>
-    <p>{description}</p>
-  </div>
+  <Draggable draggableId={task.taskId} index={ind}>
+    {provided => (
+      <div
+        className={taskBox.row}
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}>
+        <p>{task.text}</p>
+        <p>{task.description}</p>
+      </div>
+    )}
+  </Draggable>
+
 );
 export default Task;

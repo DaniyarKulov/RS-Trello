@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { IBoard } from '../../types/types';
+import { useTypedSelector } from '../../hooks/reduxHooks';
 import Form from '../form/Form';
 
 interface BoardListProps {
   setActiveBoardId: (activeBoardId: string) => void;
-  boards: IBoard[]
+
 }
 
-const BoardList: React.FC<BoardListProps> = ({ setActiveBoardId, boards }) => {
+const BoardList: React.FC<BoardListProps> = ({ setActiveBoardId }) => {
   const [formOpen, setFormOpen] = useState<boolean>(false);
-
+  const boards = useTypedSelector(state => state.boards.boardArray);
   const addButtonHandler = () => {
     setFormOpen(!formOpen);
   };

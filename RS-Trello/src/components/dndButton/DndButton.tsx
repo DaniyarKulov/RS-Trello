@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { v4 } from "uuid";
 import { useTypedDispatch } from '../../hooks/reduxHooks';
 import { addCard, addTask } from '../../redux/slices/boardsSlice';
+import { addLog } from '../../redux/slices/loggerSlice';
 
 interface DndButtonProps {
   boardId: string;
@@ -29,10 +30,17 @@ const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardI
         dispatch(
           addCard({
             boardId,
-            card: { cardId: v4(), title: text, tasks: [], date: String(new Date) },
+            card: { cardId: v4(), title: text, tasks: [] },
           })
         );
-
+        dispatch(
+          addLog({
+            logId: v4(),
+            logMessage: `Create card: ${text}`,
+            logAuthor: "User",
+            logTimestamp: String(Date.now()),
+          })
+        );
       } else {
         dispatch(
           addTask({
@@ -43,6 +51,14 @@ const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardI
               text: text,
               description: "",
             },
+          })
+        );
+        dispatch(
+          addLog({
+            logId: v4(),
+            logMessage: `Create task: ${text}`,
+            logAuthor: "User",
+            logTimestamp: String(Date.now()),
           })
         );
       }

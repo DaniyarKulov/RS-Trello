@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { v4 } from "uuid";
 import { useTypedDispatch } from '../../hooks/reduxHooks';
 import { addBoard } from '../../redux/slices/boardsSlice';
+import { addLog } from '../../redux/slices/loggerSlice';
 
 interface FormProps {
   setFormOpen: (open: boolean) => void;
@@ -19,6 +20,14 @@ const Form: React.FC<FormProps> = ({ setFormOpen }) => {
     if (text) {
       dispatch(
         addBoard({ board: { boardId: v4(), title: text, cards: [] } })
+      );
+      dispatch(
+        addLog({
+          logId: v4(),
+          logMessage: `Create board: ${text}`,
+          logAuthor: "User",
+          logTimestamp: String(Date.now()),
+        })
       );
     }
     setFormOpen(false);

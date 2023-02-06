@@ -55,7 +55,6 @@ const initialState: IBoardsState = {
         {
           cardId: 'card-0',
           title: 'Card 1',
-          date: '01.01.2023',
           tasks: [
             {
               taskId: 'task-0',
@@ -77,12 +76,12 @@ const initialState: IBoardsState = {
         {
           cardId: 'card-2',
           title: 'Card 2',
-          date: '15.01.2023',
           tasks: [
             {
               taskId: 'task-3',
               text: 'Task 1',
               description: 'Description',
+
             },
             {
               taskId: 'task-4',
@@ -100,32 +99,28 @@ const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    addBoard: (state: IBoardsState, { payload }: PayloadAction<IAddBoardAction>) => {
+    addBoard: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IAddBoardAction>
+    ) => {
       state.boardArray.push(payload.board);
     },
 
-    deleteBoard: (state: IBoardsState, { payload }: PayloadAction<IDeleteBoardAction>) => {
-      state.boardArray = state.boardArray.filter((board) => board.boardId !== payload.boardId);
-    },
-
-    addCard: (state: IBoardsState, { payload }: PayloadAction<IAddCardAction>) => {
+    addCard: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IAddCardAction>
+    ) => {
       state.boardArray.map((board) =>
-        board.boardId === payload.boardId ? { ...board, cards: board.cards.push(payload.card) } : board
-      );
-    },
-
-    deleteCard: (state: IBoardsState, { payload }: PayloadAction<IDeleteCardAction>) => {
-      state.boardArray = state.boardArray.map((board) =>
         board.boardId === payload.boardId
-          ? {
-            ...board,
-            cards: board.cards.filter((card: ICard) => card.cardId !== payload.cardId),
-          }
+          ? { ...board, cards: board.cards.push(payload.card) }
           : board
       );
     },
 
-    addTask: (state: IBoardsState, { payload }: PayloadAction<IAddTaskAction>) => {
+    addTask: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IAddTaskAction>
+    ) => {
       state.boardArray.map((board) =>
         board.boardId === payload.boardId
           ? {
@@ -138,12 +133,36 @@ const boardsSlice = createSlice({
       );
     },
 
-    deleteTask: (state: IBoardsState, { payload }: PayloadAction<IDeleteTaskAction>) => {
+    deleteBoard: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IDeleteBoardAction>
+    ) => {
+      state.boardArray = state.boardArray.filter((board) => board.boardId !== payload.boardId);
+    },
+
+    deleteCard: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IDeleteCardAction>
+    ) => {
       state.boardArray = state.boardArray.map((board) =>
         board.boardId === payload.boardId
           ? {
             ...board,
-            lists: board.cards.map((card: ICard) =>
+            cards: board.cards.filter((card: ICard) => card.cardId !== payload.cardId),
+          }
+          : board
+      );
+    },
+
+    deleteTask: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IDeleteTaskAction>
+    ) => {
+      state.boardArray = state.boardArray.map((board) =>
+        board.boardId === payload.boardId
+          ? {
+            ...board,
+            cards: board.cards.map((card: ICard) =>
               card.cardId === payload.cardId
                 ? {
                   ...card,
@@ -156,7 +175,10 @@ const boardsSlice = createSlice({
       );
     },
 
-    sort: (state: IBoardsState, { payload }: PayloadAction<ISortAction>) => {
+    sort: (
+      state: IBoardsState,
+      { payload }: PayloadAction<ISortAction>
+    ) => {
       if (payload.droppableIdStart === payload.droppableIdEnd) {
         const card: any = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdStart === card.cardId);
         const list = card.tasks.splice(payload.droppableIndexStart, 1);
@@ -164,25 +186,32 @@ const boardsSlice = createSlice({
       }
 
       if (payload.droppableIdStart !== payload.droppableIdEnd) {
-        const listStart: any = state.boardArray[payload.boardIndex].cards.find(
+        const cardStart: any = state.boardArray[payload.boardIndex].cards.find(
           (card: ICard) => payload.droppableIdStart === card.cardId
         );
-        const card = listStart.tasks.splice(payload.droppableIndexStart, 1);
-        const listEnd: any = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdEnd === card.cardId);
-        listEnd.tasks.splice(payload.droppableIndexEnd, 0, ...card);
+        const card = cardStart.tasks.splice(payload.droppableIndexStart, 1);
+        const cardEnd: any = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdEnd === card.cardId);
+        cardEnd.tasks.splice(payload.droppableIndexEnd, 0, ...card);
       }
     },
 
-    updateTask: (state: IBoardsState, { payload }: PayloadAction<IAddTaskAction>) => {
-      state.boardArray = state.boardArray.map((board) =>
+    updateTask: (
+      state: IBoardsState,
+      { payload }: PayloadAction<IAddTaskAction>
+    ) => {
+      state.boardArray = state.boardArray.map(board =>
         board.boardId === payload.boardId
           ? {
             ...board,
-            lists: board.cards.map((card: ICard) =>
+            cards: board.cards.map(card =>
               card.cardId === payload.cardId
                 ? {
                   ...card,
-                  tasks: card.tasks.map((task: ITask) => (task.taskId === payload.task.taskId ? payload.task : task)),
+                  tasks: card.tasks.map(task =>
+                    task.taskId === payload.task.taskId
+                      ? payload.task
+                      : task
+                  ),
                 }
                 : card
             ),
@@ -191,7 +220,10 @@ const boardsSlice = createSlice({
       );
     },
 
-    setModalActive: (state: IBoardsState, { payload }: PayloadAction<boolean>) => {
+    setModalActive: (
+      state: IBoardsState,
+      { payload }: PayloadAction<boolean>
+    ) => {
       state.modalActive = payload;
     },
   },
