@@ -19,8 +19,8 @@
     "plugin:import/typescript",
     // "standard-with-typescript",
     "plugin:prettier/recommended",
-    "airbnb",
-    "airbnb/hooks",
+    // "airbnb",
+    // "airbnb/hooks",
     "prettier"
   ],
   "overrides": [],
@@ -41,10 +41,10 @@
     "comma-dangle": 0,
     "no-console": 0,
     "class-methods-use-this": "off",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-var-requires": 0,
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -53,6 +53,13 @@
         ]
       }
     ],
+    // "import/no-extraneous-dependencies": [
+    //   "error",
+    //   {
+    //     "devDependencies": true,
+    //     "dependencies": false
+    //   }
+    // ],
     "import/extensions": "off",
     "react/react-in-jsx-scope": "off",
     "react/destructuring-assignment": "off", //Enforce consistent usage of destructuring assignment of props, state, and context

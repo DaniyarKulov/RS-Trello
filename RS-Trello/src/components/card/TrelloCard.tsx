@@ -1,5 +1,6 @@
 import React from 'react';
-import { ICard } from '../../Interfaces/interfaces';
+import { ICard } from '../../types/types';
+import Task from '../task/Task';
 
 interface TrelloCardProps {
   card: ICard;
@@ -8,10 +9,11 @@ interface TrelloCardProps {
 const TrelloCard: React.FC<TrelloCardProps> = ({ card }) => (
   <div>
     <p>{card.title}</p>
-    {card.tasks.map((task) => (
-      <div>
-        <p>{task.text}</p>
-        <p>{task.description}</p>
+    {card.tasks.map((task, ind) => (
+      <div key={ind}>
+        <Task
+          {...{ name: task.text, description: task.description, id: task.taskId, ind }}
+        />
       </div>
     ))}
     <button type="button">Add</button>

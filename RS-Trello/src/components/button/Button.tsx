@@ -1,20 +1,29 @@
-import React from 'react';
-import { ICard } from '../../Interfaces/interfaces';
+import React, { useState } from 'react';
+import DndButton from '../dndButton/DndButton';
 
 interface ButtonProps {
-  card: ICard;
+  card?: boolean;
+  cardId: string;
+  boardId: string
 }
 
-const Button: React.FC<ButtonProps> = ({ card }) => (
-  <div>
-    <p>{card.title}</p>
-    {card.tasks.map((task) => (
-      <div>
-        <p>{task.text}</p>
-        <p>{task.description}</p>
-      </div>
-    ))}
-    <button type="button">Add</button>
-  </div>
-);
+const Button: React.FC<ButtonProps> = ({ card, cardId, boardId }) => {
+  const [formOpen, setFormOpen] = useState(false);
+  const buttonText = card ? "Add another list" : "Add new task";
+
+  const buttonHandler = () => {
+    setFormOpen(true);
+  };
+  return formOpen ? (
+    <DndButton
+      setFormOpen={setFormOpen}
+      card={card ? true : false}
+      boardId={boardId}
+      cardId={cardId} />
+  ) : (
+    <div>
+      <button onClick={buttonHandler} type="button">{buttonText}</button>
+    </div>
+  )
+};
 export default Button;

@@ -1,18 +1,21 @@
 import React from 'react';
-import { ICard } from '../../Interfaces/interfaces';
-import TrelloCard from '../card/TrelloCard';
 
 interface TaskProps {
-  cards: ICard[];
+  // index: number;
+  // id: string;
+  name: string;
+  description: string | undefined;
 }
 
-const Task: React.FC<TaskProps> = ({ cards }) => (
+const Task: React.FC<TaskProps> = ({
+  // index,
+  // id,
+  name,
+  description,
+}) => (
   <div>
-    <p>List</p>
-    {cards.map((card) => (
-      <TrelloCard {...{ card }} />
-    ))}
-    <p>button</p>
+    <p>{name}</p>
+    <p>{description}</p>
   </div>
 );
 export default Task;

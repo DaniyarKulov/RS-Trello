@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import BoardList from './components/board/BoardList';
 import ContainerCard from './components/container/ContainerCard';
-import { initialState } from './redux/slices/boardsSlice';
+import { useTypedSelector } from './hooks/reduxHooks';
 
 function App() {
   const [activeBoardId, setActiveBoardId] = useState('board-0');
-  const boards = initialState.boardArray;
+  const boards = useTypedSelector((state) => state.boards.boardArray);
   const getActiveBoard = boards.filter((board) => board.boardId === activeBoardId)[0];
   const { cards } = getActiveBoard;
   return (
     <div>
       {/* boards */}
-      <BoardList />
+      <BoardList {...{ setActiveBoardId, boards }} />
       <div>
         {/* containers */}
-        <ContainerCard {...{ cards }} />
+        <ContainerCard {...{ cards, boardId: getActiveBoard.boardId }} />
       </div>
+      {/* button */}
     </div>
   );
 }
