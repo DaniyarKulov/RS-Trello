@@ -32,7 +32,11 @@
     },
     "project": "./**/tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
     "comma-dangle": 0,
     "no-console": 0,
@@ -41,11 +45,25 @@
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-var-requires": 0,
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
     "import/extensions": "off",
     "react/react-in-jsx-scope": "off",
     "react/destructuring-assignment": "off", //Enforce consistent usage of destructuring assignment of props, state, and context
     "@typescript-eslint/explicit-function-return-type": "off",
+    "react/function-component-definition": [
+      "off",
+      {
+        "namedComponents": "function-declaration",
+        "unnamedComponents": "function-expression"
+      }
+    ],
     "jsx-a11y/click-events-have-key-events": "off", // must use key eventson event click
     "jsx-a11y/no-static-element-interactions": "off" //div change on button and type button
     // "jsx-a11y/label-has-associated-control": "off"
