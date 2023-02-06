@@ -13,7 +13,6 @@ export interface ICard {
   cardId: string;
   title: string;
   tasks: ITask[];
-  date: string;
 }
 
 export interface IBoard {
@@ -29,4 +28,11 @@ export interface MyInputProps {
   placeholder?: string;
   defaultValue?: string;
   buttonText?: string;
+}
+
+export interface ILogItem {
+  logId: string;
+  logAuthor: string;
+  logMessage: string;
+  logTimestamp: string;
 }

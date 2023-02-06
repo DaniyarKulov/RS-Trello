@@ -1,18 +1,29 @@
 import React from 'react';
-import { ICard } from '../../Interfaces/interfaces';
-import TrelloCard from '../card/TrelloCard';
+import { Draggable } from "react-beautiful-dnd";
+import { ITask } from '../../types/types';
+import taskBox from './Task.module.css';
 
 interface TaskProps {
-  cards: ICard[];
+  ind: number;
+  task: ITask
 }
 
-const Task: React.FC<TaskProps> = ({ cards }) => (
-  <div>
-    <p>List</p>
-    {cards.map((card) => (
-      <TrelloCard {...{ card }} />
-    ))}
-    <p>button</p>
-  </div>
+const Task: React.FC<TaskProps> = ({
+  ind,
+  task
+}) => (
+  <Draggable draggableId={task.taskId} index={ind}>
+    {provided => (
+      <div
+        className={taskBox.row}
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}>
+        <p>{task.text}</p>
+        <p>{task.description}</p>
+      </div>
+    )}
+  </Draggable>
+
 );
 export default Task;
