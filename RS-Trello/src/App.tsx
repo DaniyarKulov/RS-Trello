@@ -7,6 +7,7 @@ import ContainerCard from './components/container/ContainerCard';
 import { addLog } from './redux/slices/loggerSlice';
 import { v4 } from 'uuid';
 import Edit from './components/edit/Edit';
+import Footer from './components/footer/footer';
 
 function App() {
   const dispatch = useTypedDispatch();
@@ -100,6 +101,7 @@ function App() {
           Delete this board
         </button>
       </div >
+      <Footer/>
     </div >
   );
 }
