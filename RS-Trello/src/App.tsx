@@ -7,7 +7,8 @@ import ContainerCard from './components/container/ContainerCard';
 import { addLog } from './redux/slices/loggerSlice';
 import { v4 } from 'uuid';
 import Edit from './components/edit/Edit';
-import Footer from './components/footer/footer';
+import Footer from './components/footer/Footer';
+import Header from './components/header/Header';
 
 function App() {
   const dispatch = useTypedDispatch();
@@ -85,6 +86,7 @@ function App() {
       height: "400px",
       width: "100vw",
     }}>
+      <Header/>
       {modalActive ? <Edit /> : null}
       <BoardList {...{ setActiveBoardId }} />
       <div style={{
