@@ -1,0 +1,26 @@
+.footer {
+    background-color: #3d5a80;
+}
+
+.footerWraper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.github {
+    display: flex;
+    align-items: center;
+}
+
+
+.githubItem {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+.fopterYear {
+    color: #ffffff;
+}
