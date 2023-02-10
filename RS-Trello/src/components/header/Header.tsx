@@ -1,9 +1,11 @@
-
+import header from './Header.module.css'
 
 const Header = () => {
     return (
-        <header className="header">
-            <h1 className="headerText">Trello:</h1>
+        <header className={header.header}>
+            <div className="container">
+                <h1 className={header.headerText}>Trello:</h1>
+            </div>
         </header>
     )
 }
