@@ -80,29 +80,20 @@ function App() {
   };
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      height: "400px",
-      width: "100vw",
-    }}>
+    <div>
       <Header/>
       {modalActive ? <Edit /> : null}
       <BoardList {...{ setActiveBoardId }} />
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        height: "100%",
-      }}>
+      <div className="container">
         <DragDropContext onDragEnd={onDragEnd}>
           <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
         </DragDropContext>
       </div >
-      <div>
+      <div className="container">
         <button onClick={handleDeleteBoard}>
           Delete this board
         </button>
-      </div >
+      </div>
       <Footer/>
     </div >
   );
