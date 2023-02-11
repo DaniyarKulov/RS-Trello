@@ -19,7 +19,6 @@ const BoardList: React.FC<BoardListProps> = ({ setActiveBoardId }) => {
 
   return (
     <div>
-      <h1>Trello:</h1>
       {boards.map((board, ind) => (
         <button type="button" key={ind} onClick={() => handleChooseBoard(ind)}>
           {board.title}
