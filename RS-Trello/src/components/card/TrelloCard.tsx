@@ -55,9 +55,9 @@ const TrelloCard: React.FC<TrelloCardProps> = ({ card, boardId }) => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-            <p>{card.title}</p>
-            <p onClick={() => handleCardDelete(card.cardId)}>delete</p>
+          <div className={trelloCard.cardHeader}>
+            <p className={trelloCard.listHeader}>{card.title}</p>
+            <button onClick={() => handleCardDelete(card.cardId)}>X</button>
           </div>
           <div className={trelloCard.tasks}>
             {card.tasks.map((task, ind) => (

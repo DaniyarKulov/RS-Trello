@@ -9,7 +9,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ card, cardId, boardId }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const buttonText = card ? "Add another card" : "Add new task";
+  const buttonText = card ? "+ Add another card" : "+ Add new task";
 
   const buttonHandler = () => {
     setFormOpen(true);

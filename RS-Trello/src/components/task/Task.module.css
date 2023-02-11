@@ -1,8 +1,20 @@
 .row {
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: #ffffff;
+  width: 200px;
   border-radius: 5px;
-  height: 100px;
+  height: 100%;
   margin-bottom: 10px;
+
+}
+
+.listHeader {
+  word-wrap: break-word;
+  clear: both;
+  color: var(--ds-text, #172b4d);
+  display: block;
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-decoration: none;
 }

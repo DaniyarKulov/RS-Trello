@@ -1,10 +1,29 @@
 .card {
+  padding: 10px;
   width: 200px;
-  height: 400px;
-  background-color: grey;
+  height: 100%;
+  background-color: var(--ds-background-accent-gray-subtlest,#ebecf0);
+  border-radius: 10px;
 }
 
 .tasks {
-  height: 30px;
   justify-content: space-between;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
+
+.listHeader {
+  word-wrap: break-word;
+  clear: both;
+  color: var(--ds-text, #172b4d);
+  display: block;
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-decoration: none;
 }
