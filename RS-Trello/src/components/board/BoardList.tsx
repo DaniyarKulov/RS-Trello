@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTypedSelector } from '../../hooks/reduxHooks';
 import Form from '../form/Form';
+import style from './BoardList.module.css'
 
 interface BoardListProps {
   setActiveBoardId: (activeBoardId: string) => void;
@@ -19,19 +20,21 @@ const BoardList: React.FC<BoardListProps> = ({ setActiveBoardId }) => {
 
   return (
     <div className="container">
-      {boards.map((board, ind) => (
-        <button type="button" key={ind} onClick={() => handleChooseBoard(ind)}>
-          {board.title}
-        </button>
-      ))
-      }
+      <div className={style.board}>
+        {boards.map((board, ind) => (
+          <button type="button" className={style.boardTitle} key={ind} onClick={() => handleChooseBoard(ind)}>
+            {board.title}
+          </button>
+        ))
+        }
 
         {formOpen ? (
           <Form {...{ setFormOpen }} />
         ) : (
-          <button onClick={addButtonHandler} type="button">Create new board</button>
+          <button className={style.boardAdd} onClick={addButtonHandler} type="button">Create new board</button>
         )}
       </div>
+    </div>
 
   )
 };
