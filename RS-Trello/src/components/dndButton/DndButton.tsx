@@ -8,14 +8,14 @@ import btnStyles from './DndButton.module.css'
 interface DndButtonProps {
   boardId: string;
   cardId: string;
-  setFormOpen: any;
+  setFormOpen: Function;
   card?: boolean;
 }
 
 const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardId }) => {
   const dispatch = useTypedDispatch();
   const [text, setText] = useState("");
-
+  console.log(setFormOpen)
   const formPlaceholder = card
     ? "Enter card title"
     : "Enter title for this task";

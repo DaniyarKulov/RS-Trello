@@ -10,6 +10,20 @@ import Edit from './components/edit/Edit';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 
+
+
+type IOnDragEnd = {
+  combine: null
+  destination: { droppableId: string, index: number }
+  draggableId: string;
+  mode: string;
+  reason: string;
+  source: { index: number, droppableId: string }
+  type: string;
+};
+// тут нужно что-то сделать что я не знаю 
+
+
 function App() {
   const dispatch = useTypedDispatch();
   const [activeBoardId, setActiveBoardId] = useState('board-0');
@@ -18,7 +32,7 @@ function App() {
   const getActiveBoard = boards.filter((board) => board.boardId === activeBoardId)[0];
   const cards = getActiveBoard.cards;
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = (result: IOnDragEnd) => {
     const { destination, source, draggableId } = result;
     const sourceCard = cards.filter(
       card => card.cardId === source.droppableId

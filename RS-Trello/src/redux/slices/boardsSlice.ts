@@ -180,18 +180,24 @@ const boardsSlice = createSlice({
       { payload }: PayloadAction<ISortAction>
     ) => {
       if (payload.droppableIdStart === payload.droppableIdEnd) {
-        const card: any = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdStart === card.cardId);
-        const list = card.tasks.splice(payload.droppableIndexStart, 1);
-        card?.tasks.splice(payload.droppableIndexEnd, 0, ...list);
+        const card: ICard | undefined = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdStart === card.cardId);
+
+        if (card) {
+          const list = card.tasks.splice(payload.droppableIndexStart, 1);
+          card?.tasks.splice(payload.droppableIndexEnd, 0, ...list);
+        }
       }
 
       if (payload.droppableIdStart !== payload.droppableIdEnd) {
-        const cardStart: any = state.boardArray[payload.boardIndex].cards.find(
+        const cardStart: ICard | undefined = state.boardArray[payload.boardIndex].cards.find(
           (card: ICard) => payload.droppableIdStart === card.cardId
         );
-        const card = cardStart.tasks.splice(payload.droppableIndexStart, 1);
-        const cardEnd: any = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdEnd === card.cardId);
-        cardEnd.tasks.splice(payload.droppableIndexEnd, 0, ...card);
+        if (cardStart){
+          const card = cardStart.tasks.splice(payload.droppableIndexStart, 1);
+          const cardEnd: ICard | undefined = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdEnd === card.cardId);
+          cardEnd?.tasks.splice(payload.droppableIndexEnd, 0, ...card);
+        }
+        
       }
     },
 
