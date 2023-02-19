@@ -80,21 +80,21 @@ function App() {
   };
 
   return (
-    <div>
-      <Header/>
-      {modalActive ? <Edit /> : null}
-      <BoardList {...{ setActiveBoardId }} />
-      <div className="container">
-        <DragDropContext onDragEnd={onDragEnd}>
-          <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
-        </DragDropContext>
-      </div >
-      <div className="container">
-        <button onClick={handleDeleteBoard}>
-          Delete this board
-        </button>
-      </div>
-      <Footer/>
+    <div className='wrapper'>
+      <Header />
+      <main className='main'>
+        <div className="container">
+          {modalActive ? <Edit /> : null}
+          <BoardList {...{ setActiveBoardId }} />
+          <DragDropContext onDragEnd={onDragEnd}>
+            <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
+          </DragDropContext>
+          <button className='btn' onClick={handleDeleteBoard}>
+            Delete this board
+          </button>
+        </div>
+      </main>
+      <Footer />
     </div >
   );
 }

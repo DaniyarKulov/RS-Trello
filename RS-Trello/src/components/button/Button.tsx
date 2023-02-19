@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DndButton from '../dndButton/DndButton';
-
+import styleBtn from './Button.module.css'
 interface ButtonProps {
   boardId: string
   cardId: string;
@@ -9,7 +9,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ card, cardId, boardId }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const buttonText = card ? "+ Add another card" : "+ Add new task";
+  const buttonText = card ? "Add another card" : "Add new task";
 
   const buttonHandler = () => {
     setFormOpen(true);
@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({ card, cardId, boardId }) => {
       cardId={cardId} />
   ) : (
     <div>
-      <button onClick={buttonHandler} type="button">{buttonText}</button>
+      <button className={styleBtn.btn} onClick={buttonHandler} type="button">{buttonText}</button>
     </div>
   )
 };

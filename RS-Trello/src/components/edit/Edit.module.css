@@ -27,6 +27,8 @@
 .headerText {
   font-size: 26px;
   font-weight: 600;
+  width: 99%;
+  word-wrap: break-word;
 }
 
 .task {

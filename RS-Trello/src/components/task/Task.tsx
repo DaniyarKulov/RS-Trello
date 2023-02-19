@@ -20,7 +20,7 @@ const Task: React.FC<TaskProps> = ({
         {...provided.draggableProps}
         {...provided.dragHandleProps}>
         <p className={taskBox.listHeader}>{task.text}</p>
-        <p className={taskBox.listHeader}>{task.description}</p>
+        <p className={taskBox.listDescription}>{task.description}</p>
       </div>
     )}
   </Draggable>

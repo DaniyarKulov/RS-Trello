@@ -19,23 +19,20 @@ const BoardList: React.FC<BoardListProps> = ({ setActiveBoardId }) => {
   };
 
   return (
-    <div className="container">
-      <div className={style.board}>
-        {boards.map((board, ind) => (
-          <button type="button" className={style.boardTitle} key={ind} onClick={() => handleChooseBoard(ind)}>
-            {board.title}
-          </button>
-        ))
-        }
+    <div className={style.board}>
+      {boards.map((board, ind) => (
+        <button type="button" className={style.boardTitle} key={ind} onClick={() => handleChooseBoard(ind)}>
+          {board.title}
+        </button>
+      ))
+      }
 
-        {formOpen ? (
-          <Form {...{ setFormOpen }} />
-        ) : (
-          <button className={style.boardAdd} onClick={addButtonHandler} type="button">Create new board</button>
-        )}
-      </div>
+      {formOpen ? (
+        <Form {...{ setFormOpen }} />
+      ) : (
+        <button className={style.boardAdd} onClick={addButtonHandler} type="button">Create new board</button>
+      )}
     </div>
-
   )
 };
 export default BoardList;

@@ -1,7 +1,8 @@
-.app {}
-
 .wrapper {
+  margin-top: 30px;
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 15px;
   /* overflow-x: scroll; I don't now if we need it */
+
 }
