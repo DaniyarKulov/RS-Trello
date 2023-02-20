@@ -10,6 +10,20 @@ import Edit from './components/edit/Edit';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 
+
+
+type IOnDragEnd = {
+  combine: null
+  destination: { droppableId: string, index: number }
+  draggableId: string;
+  mode: string;
+  reason: string;
+  source: { index: number, droppableId: string }
+  type: string;
+};
+// тут нужно что-то сделать что я не знаю 
+
+
 function App() {
   const dispatch = useTypedDispatch();
   const [activeBoardId, setActiveBoardId] = useState('board-0');
@@ -18,7 +32,7 @@ function App() {
   const getActiveBoard = boards.filter((board) => board.boardId === activeBoardId)[0];
   const cards = getActiveBoard.cards;
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = (result: IOnDragEnd) => {
     const { destination, source, draggableId } = result;
     const sourceCard = cards.filter(
       card => card.cardId === source.droppableId
@@ -80,30 +94,21 @@ function App() {
   };
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      height: "400px",
-      width: "100vw",
-    }}>
-      <Header/>
-      {modalActive ? <Edit /> : null}
-      <BoardList {...{ setActiveBoardId }} />
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        height: "100%",
-      }}>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
-        </DragDropContext>
-      </div >
-      <div>
-        <button onClick={handleDeleteBoard}>
-          Delete this board
-        </button>
-      </div >
-      <Footer/>
+    <div className='wrapper'>
+      <Header />
+      <main className='main'>
+        <div className="container">
+          {modalActive ? <Edit /> : null}
+          <BoardList {...{ setActiveBoardId }} />
+          <DragDropContext onDragEnd={onDragEnd}>
+            <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
+          </DragDropContext>
+          <button className='btn' onClick={handleDeleteBoard}>
+            Delete this board
+          </button>
+        </div>
+      </main>
+      <Footer />
     </div >
   );
 }

@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { useTypedDispatch } from '../../hooks/reduxHooks';
 import { addBoard } from '../../redux/slices/boardsSlice';
 import { addLog } from '../../redux/slices/loggerSlice';
+import styleForm from './Form.module.css'
 
 interface FormProps {
   setFormOpen: (open: boolean) => void;
@@ -37,15 +38,16 @@ const Form: React.FC<FormProps> = ({ setFormOpen }) => {
     setText(e.target.value);
   };
   return (
-    <div>
+    <div >
       <input
         type="text"
         autoFocus
         onBlur={handleOnBlur}
         onChange={handleTextChange}
         placeholder="Enter new board name"
+        className={styleForm.boardInput}
       />
-      <button type='button' onMouseDown={handleAddBoard}>Enter</button>
+      <button  className={styleForm.boardAdd} type='button' onMouseDown={handleAddBoard}>Create</button>
     </div>
   )
 };

@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { useTypedDispatch, useTypedSelector } from '../../hooks/reduxHooks';
 import { deleteTask, setModalActive, updateTask } from '../../redux/slices/boardsSlice';
 import { addLog } from '../../redux/slices/loggerSlice';
+import editClases from './Edit.module.css';
 
 
 const Edit: React.FC = () => {
@@ -55,7 +56,7 @@ const Edit: React.FC = () => {
     setData({ ...data, task: { ...data.task, text: e.target.value } });
   };
 
-  const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setData({
       ...data,
       task: { ...data.task, description: e.target.value },
@@ -63,30 +64,37 @@ const Edit: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>
-        <p>{editingState.task.text}</p>
-        <button onClick={handleCloseButton}>close</button>
-      </div>
-      <div>Task name</div>
-      <input
-        type="text"
-        value={data.task.text}
-        onChange={handleNameChange}
-      />
-      <div>Task description</div>
-      <input
-        type="text"
-        value={data.task.description}
-        onChange={handleDescriptionChange}
-      />
-      <div>
-        <button onClick={handleUpdate}>
-          Update task
-        </button>
-        <button onClick={handleDelete}>
-          Delete tasks
-        </button>
+    <div className={editClases.containerDesription}>
+      <div className={editClases.descriptionCard}>
+        <div className={editClases.header}>
+          <div className={editClases.headerText}>{editingState.task.text}</div>
+          <button className={editClases.cross} onClick={handleCloseButton}></button>
+        </div>
+        <div className={editClases.task}>
+          <div className={editClases.taskName}>Task name:</div>
+          <input
+            placeholder='Write the name of the task'
+            type="text"
+            value={data.task.text}
+            onChange={handleNameChange}
+            className={editClases.taskInput}
+          />
+        </div>
+        <div className={editClases.descriptionHeader}>Task description</div>
+        <textarea
+          placeholder='Write a description of the task'
+          value={data.task.description}
+          onChange={handleDescriptionChange}
+          className={editClases.descriptionText}
+        />
+        <div>
+          <button className={editClases.btnUpdate} onClick={handleUpdate}>
+            Update task
+          </button>
+          <button className={editClases.btn} onClick={handleDelete}>
+            Delete tasks
+          </button>
+        </div>
       </div>
     </div>
   )
