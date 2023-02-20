@@ -6,6 +6,7 @@ import Registration from './components/authorization/Registration';
 import Login from './components/authorization/Login';
 import { useTypedSelector } from './hooks/reduxHooks';
 import { PrivateRout } from './components/router/PrivateRouter';
+
 function App() {
   const isAuth = useTypedSelector((state) => state.user.isAuth);
   return (

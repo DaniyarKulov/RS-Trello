@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DndButton from '../dndButton/DndButton';
-
+import styleBtn from './Button.module.css'
 interface ButtonProps {
   boardId: string
   cardId: string;
@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({ card, cardId, boardId }) => {
       cardId={cardId} />
   ) : (
     <div>
-      <button onClick={buttonHandler} type="button">{buttonText}</button>
+      <button className={styleBtn.btn} onClick={buttonHandler} type="button">{buttonText}</button>
     </div>
   )
 };

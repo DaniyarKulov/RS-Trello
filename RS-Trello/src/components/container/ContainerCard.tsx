@@ -11,13 +11,11 @@ interface ContainerCardProps {
 }
 
 const ContainerCard: React.FC<ContainerCardProps> = ({ cards, boardId }) => (
-  <div className={containerCard.app}>
-    <div className={containerCard.wrapper}>
-      {cards.map((card) => (
-        <TrelloCard key={card.cardId} {...{ card, boardId }} />
-      ))}
-      <Button card boardId={boardId} cardId='' />
-    </div>
+  <div className={containerCard.wrapper}>
+    {cards.map((card) => (
+      <TrelloCard key={card.cardId} {...{ card, boardId }} />
+    ))}
+    <Button card boardId={boardId} cardId='' />
   </div>
 );
 export default ContainerCard;
