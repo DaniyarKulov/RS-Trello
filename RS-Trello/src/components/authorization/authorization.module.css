@@ -1,0 +1,25 @@
+.containerAuth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 23px;
+  flex-direction: column;
+}
+.inputBlock {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+.textAuth {
+  margin: 20px 0;
+}
+.buttonSubmit {
+  width: 120px;
+  height: 50px;
+  font-size: 20px;
+
+  display: flex;
+  justify-content: center;
+}
