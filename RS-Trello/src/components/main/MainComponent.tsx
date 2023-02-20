@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { deleteBoard, sort } from '../../redux/slices/boardsSlice';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/reduxHooks';
 import BoardList from '../board/BoardList';
@@ -16,7 +16,7 @@ function MainComponent() {
   const getActiveBoard = boards.filter((board) => board.boardId === activeBoardId)[0];
   const cards = getActiveBoard.cards;
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     const sourceCard = cards.filter((card) => card.cardId === source.droppableId)[0];
 
