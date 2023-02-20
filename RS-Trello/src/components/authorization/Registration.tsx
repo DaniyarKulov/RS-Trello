@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { registration } from '../../actions/registration';
 import authorization from './authorization.module.css';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/reduxHooks';

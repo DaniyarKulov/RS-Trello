@@ -69,24 +69,36 @@ function MainComponent() {
   };
 
   return (
-    <main>
-      {modalActive ? <Edit /> : null}
-      <BoardList {...{ setActiveBoardId }} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          height: '100%',
-        }}
-      >
+    <main className="main">
+      <div className="container">
+        {modalActive ? <Edit /> : null}
+        <BoardList {...{ setActiveBoardId }} />
         <DragDropContext onDragEnd={onDragEnd}>
           <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
         </DragDropContext>
-        <div>
-          <button onClick={handleDeleteBoard}>Delete this board</button>
-        </div>
+        <button className="btn" onClick={handleDeleteBoard}>
+          Delete this board
+        </button>
       </div>
     </main>
+    // <main>
+    //   {modalActive ? <Edit /> : null}
+    //   <BoardList {...{ setActiveBoardId }} />
+    //   <div
+    //     style={{
+    //       display: 'flex',
+    //       flexDirection: 'row',
+    //       height: '100%',
+    //     }}
+    //   >
+    //     <DragDropContext onDragEnd={onDragEnd}>
+    //       <ContainerCard cards={cards} boardId={getActiveBoard.boardId} />
+    //     </DragDropContext>
+    //     <div>
+    //       <button onClick={handleDeleteBoard}>Delete this board</button>
+    //     </div>
+    //   </div>
+    // </main>
   );
 }
 
