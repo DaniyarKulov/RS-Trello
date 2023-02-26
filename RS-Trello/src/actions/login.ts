@@ -7,7 +7,7 @@ import { setUser } from '../redux/slices/userSlice';
 export const login = (email: string, password: string) => {
   return async (dispatch: AppDispatch): Promise<void> => {
     try {
-      const response = await axios.post(`http://localhost:5000/auth/login`, {
+      const response = await axios.post(`https://server-trello-production.up.railway.app/auth/login`, {
         email,
         password,
       });

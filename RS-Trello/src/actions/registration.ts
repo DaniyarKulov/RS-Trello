@@ -7,7 +7,7 @@ export const registration =
   async (dispatch: AppDispatch): Promise<void> => {
     try {
       const response = await axios
-        .post(`http://localhost:5000/auth/registration`, {
+        .post(`https://server-trello-production.up.railway.app/auth/registration`, {
           email,
           password,
         })

@@ -51,46 +51,7 @@ const initialState: IBoardsState = {
     {
       boardId: 'board-0',
       title: 'First board',
-      cards: [
-        {
-          cardId: 'card-0',
-          title: 'Card 1',
-          tasks: [
-            {
-              taskId: 'task-0',
-              text: 'Task 1',
-              description: 'Description',
-            },
-            {
-              taskId: 'task-1',
-              text: 'Task 2',
-              description: 'Description',
-            },
-            {
-              taskId: 'task-2',
-              text: 'Task 3',
-              description: 'Description',
-            },
-          ],
-        },
-        {
-          cardId: 'card-2',
-          title: 'Card 2',
-          tasks: [
-            {
-              taskId: 'task-3',
-              text: 'Task 1',
-              description: 'Description',
-
-            },
-            {
-              taskId: 'task-4',
-              text: 'Task 2',
-              description: 'Description',
-            },
-          ],
-        },
-      ],
+      cards: [],
     },
   ],
 };
@@ -99,88 +60,67 @@ const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    addBoard: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IAddBoardAction>
-    ) => {
+    addBoard: (state: IBoardsState, { payload }: PayloadAction<IAddBoardAction>) => {
       state.boardArray.push(payload.board);
     },
 
-    addCard: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IAddCardAction>
-    ) => {
+    addCard: (state: IBoardsState, { payload }: PayloadAction<IAddCardAction>) => {
       state.boardArray.map((board) =>
-        board.boardId === payload.boardId
-          ? { ...board, cards: board.cards.push(payload.card) }
-          : board
+        board.boardId === payload.boardId ? { ...board, cards: board.cards.push(payload.card) } : board
       );
     },
 
-    addTask: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IAddTaskAction>
-    ) => {
+    addTask: (state: IBoardsState, { payload }: PayloadAction<IAddTaskAction>) => {
       state.boardArray.map((board) =>
         board.boardId === payload.boardId
           ? {
-            ...board,
-            cards: board.cards.map((card: ICard) =>
-              card.cardId === payload.cardId ? { ...card, tasks: card.tasks.push(payload.task) } : card
-            ),
-          }
+              ...board,
+              cards: board.cards.map((card: ICard) =>
+                card.cardId === payload.cardId ? { ...card, tasks: card.tasks.push(payload.task) } : card
+              ),
+            }
           : board
       );
     },
 
-    deleteBoard: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IDeleteBoardAction>
-    ) => {
+    deleteBoard: (state: IBoardsState, { payload }: PayloadAction<IDeleteBoardAction>) => {
       state.boardArray = state.boardArray.filter((board) => board.boardId !== payload.boardId);
     },
 
-    deleteCard: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IDeleteCardAction>
-    ) => {
+    deleteCard: (state: IBoardsState, { payload }: PayloadAction<IDeleteCardAction>) => {
       state.boardArray = state.boardArray.map((board) =>
         board.boardId === payload.boardId
           ? {
-            ...board,
-            cards: board.cards.filter((card: ICard) => card.cardId !== payload.cardId),
-          }
+              ...board,
+              cards: board.cards.filter((card: ICard) => card.cardId !== payload.cardId),
+            }
           : board
       );
     },
 
-    deleteTask: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IDeleteTaskAction>
-    ) => {
+    deleteTask: (state: IBoardsState, { payload }: PayloadAction<IDeleteTaskAction>) => {
       state.boardArray = state.boardArray.map((board) =>
         board.boardId === payload.boardId
           ? {
-            ...board,
-            cards: board.cards.map((card: ICard) =>
-              card.cardId === payload.cardId
-                ? {
-                  ...card,
-                  tasks: card.tasks.filter((task: ITask) => task.taskId !== payload.taskId),
-                }
-                : card
-            ),
-          }
+              ...board,
+              cards: board.cards.map((card: ICard) =>
+                card.cardId === payload.cardId
+                  ? {
+                      ...card,
+                      tasks: card.tasks.filter((task: ITask) => task.taskId !== payload.taskId),
+                    }
+                  : card
+              ),
+            }
           : board
       );
     },
 
-    sort: (
-      state: IBoardsState,
-      { payload }: PayloadAction<ISortAction>
-    ) => {
+    sort: (state: IBoardsState, { payload }: PayloadAction<ISortAction>) => {
       if (payload.droppableIdStart === payload.droppableIdEnd) {
-        const card: ICard | undefined = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdStart === card.cardId);
+        const card: ICard | undefined = state.boardArray[payload.boardIndex].cards.find(
+          (card: ICard) => payload.droppableIdStart === card.cardId
+        );
 
         if (card) {
           const list = card.tasks.splice(payload.droppableIndexStart, 1);
@@ -192,44 +132,35 @@ const boardsSlice = createSlice({
         const cardStart: ICard | undefined = state.boardArray[payload.boardIndex].cards.find(
           (card: ICard) => payload.droppableIdStart === card.cardId
         );
-        if (cardStart){
+        if (cardStart) {
           const card = cardStart.tasks.splice(payload.droppableIndexStart, 1);
-          const cardEnd: ICard | undefined = state.boardArray[payload.boardIndex].cards.find((card: ICard) => payload.droppableIdEnd === card.cardId);
+          const cardEnd: ICard | undefined = state.boardArray[payload.boardIndex].cards.find(
+            (card: ICard) => payload.droppableIdEnd === card.cardId
+          );
           cardEnd?.tasks.splice(payload.droppableIndexEnd, 0, ...card);
         }
-        
       }
     },
 
-    updateTask: (
-      state: IBoardsState,
-      { payload }: PayloadAction<IAddTaskAction>
-    ) => {
-      state.boardArray = state.boardArray.map(board =>
+    updateTask: (state: IBoardsState, { payload }: PayloadAction<IAddTaskAction>) => {
+      state.boardArray = state.boardArray.map((board) =>
         board.boardId === payload.boardId
           ? {
-            ...board,
-            cards: board.cards.map(card =>
-              card.cardId === payload.cardId
-                ? {
-                  ...card,
-                  tasks: card.tasks.map(task =>
-                    task.taskId === payload.task.taskId
-                      ? payload.task
-                      : task
-                  ),
-                }
-                : card
-            ),
-          }
+              ...board,
+              cards: board.cards.map((card) =>
+                card.cardId === payload.cardId
+                  ? {
+                      ...card,
+                      tasks: card.tasks.map((task) => (task.taskId === payload.task.taskId ? payload.task : task)),
+                    }
+                  : card
+              ),
+            }
           : board
       );
     },
 
-    setModalActive: (
-      state: IBoardsState,
-      { payload }: PayloadAction<boolean>
-    ) => {
+    setModalActive: (state: IBoardsState, { payload }: PayloadAction<boolean>) => {
       state.modalActive = payload;
     },
   },
