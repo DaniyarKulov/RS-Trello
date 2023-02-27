@@ -1,19 +1,27 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { AppDispatch } from '../redux/store';
 import { setError } from '../redux/slices/userSlice';
 
+interface Registr {
+  message: string;
+}
+interface EmailPass {
+  email: string;
+  password: string;
+}
 export const registration =
   (email: string, password: string) =>
   async (dispatch: AppDispatch): Promise<void> => {
     try {
-      const response = await axios
-        .post(`https://server-trello-production.up.railway.app/auth/registration`, {
+      const response = await axios.post<EmailPass, AxiosResponse<Registr>>(
+        `https://server-trello-production.up.railway.app/auth/registration`,
+        {
           email,
           password,
-        })
-        .catch((err) => dispatch(setError(err.response.data.message)));
+        }
+      );
       dispatch(setError(response.data.message));
     } catch (error) {
-      console.log(error);
+      dispatch(setError((error as AxiosError<Registr>).response?.data.message || ''));
     }
   };

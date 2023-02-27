@@ -1,25 +1,23 @@
 import React, { ChangeEvent, useState } from 'react';
-import { v4 } from "uuid";
+import { v4 } from 'uuid';
 import { useTypedDispatch } from '../../hooks/reduxHooks';
 import { addCard, addTask } from '../../redux/slices/boardsSlice';
 import { addLog } from '../../redux/slices/loggerSlice';
-import btnStyles from './DndButton.module.css'
+import btnStyles from './DndButton.module.css';
 
 interface DndButtonProps {
   boardId: string;
   cardId: string;
-  setFormOpen: Function;
+  setFormOpen: any;
   card?: boolean;
 }
 
 const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardId }) => {
   const dispatch = useTypedDispatch();
-  const [text, setText] = useState("");
-  console.log(setFormOpen)
-  const formPlaceholder = card
-    ? "Enter card title"
-    : "Enter title for this task";
-  const buttonTitle = card ? "Add card" : "Add task";
+  const [text, setText] = useState('');
+  console.log(setFormOpen);
+  const formPlaceholder = card ? 'Enter card title' : 'Enter title for this task';
+  const buttonTitle = card ? 'Add card' : 'Add task';
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -38,7 +36,7 @@ const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardI
           addLog({
             logId: v4(),
             logMessage: `Create card: ${text}`,
-            logAuthor: "User",
+            logAuthor: 'User',
             logTimestamp: String(Date.now()),
           })
         );
@@ -50,7 +48,7 @@ const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardI
             task: {
               taskId: v4(),
               text: text,
-              description: "",
+              description: '',
             },
           })
         );
@@ -58,7 +56,7 @@ const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardI
           addLog({
             logId: v4(),
             logMessage: `Create task: ${text}`,
-            logAuthor: "User",
+            logAuthor: 'User',
             logTimestamp: String(Date.now()),
           })
         );
@@ -76,15 +74,17 @@ const DndButton: React.FC<DndButtonProps> = ({ setFormOpen, card, cardId, boardI
         autoFocus
         onBlur={closeButtonHandler}
         onChange={handleTextChange}
-        className = {btnStyles.dnbInput}
+        className={btnStyles.dnbInput}
       />
-      <div className={btnStyles.btnContainer} >
+      <div className={btnStyles.btnContainer}>
         <button className={btnStyles.addDescription} onMouseDown={addBbuttonHandler}>
           {buttonTitle}
         </button>
-        <button type="button" className={btnStyles.removeDescription} onClick={closeButtonHandler}>close</button>
+        <button type="button" className={btnStyles.removeDescription} onClick={closeButtonHandler}>
+          close
+        </button>
       </div>
     </div>
-  )
+  );
 };
 export default DndButton;
